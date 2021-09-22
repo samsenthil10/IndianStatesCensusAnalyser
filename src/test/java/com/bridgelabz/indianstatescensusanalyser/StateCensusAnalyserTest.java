@@ -38,4 +38,14 @@ public class StateCensusAnalyserTest {
 			assertEquals(StateCensusAnalyserException.CensusException.INCORRECT_TYPE_ISSUE, e.exceptionType);
 		}
 	}
+	
+	@Test
+	public void givenCorrectCSVFile_WhenDelimiterInvalid_ThrowDelimiterIssueException() {
+		try {
+			StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+			stateCensusAnalyserMain.loadIndianStateCensusData(CSV_FILE_WITH_WRONG_DELIMITER);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.DELIMITER_ISSUE, e.exceptionType);
+		}
+	}
 }
