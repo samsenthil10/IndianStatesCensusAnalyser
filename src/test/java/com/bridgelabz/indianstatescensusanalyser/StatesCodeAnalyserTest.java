@@ -49,4 +49,12 @@ public class StatesCodeAnalyserTest {
 			assertEquals(StateCensusAnalyserException.CensusException.DELIMITER_ISSUE, e.exceptionType);
 		}
 	}
+	@Test
+	public void givenCorrectCSVFile_WhenHeaderAbsent_ThrowIncorrectHeaderException() {
+		try {
+			analyser.loadIndianStateCodeData(CSV_FILE_WITHOUT_HEADER);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.INCORRECT_HEADER_PROBLEM, e.exceptionType);
+		}
+	}
 }
