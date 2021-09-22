@@ -15,12 +15,12 @@ public class StateCensusAnalyser {
 	public int loadIndianStateCensusData(String filePath) throws StateCensusAnalyserException {
 		try(Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
 
-			CsvToBeanBuilder<CSVStateCensus> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
-			csvToBeanBuilder.withType(CSVStateCensus.class);
+			CsvToBeanBuilder<CsvStateCensus> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
+			csvToBeanBuilder.withType(CsvStateCensus.class);
 			csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-			CsvToBean<CSVStateCensus> csvToBean = csvToBeanBuilder.build();
-			Iterator<CSVStateCensus> censusCSVIterator = csvToBean.iterator();
-			Iterable<CSVStateCensus>  csvIterable = () -> censusCSVIterator;
+			CsvToBean<CsvStateCensus> csvToBean = csvToBeanBuilder.build();
+			Iterator<CsvStateCensus> censusCSVIterator = csvToBean.iterator();
+			Iterable<CsvStateCensus>  csvIterable = () -> censusCSVIterator;
 			int numberOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(),false).count();
 			return numberOfEntries;
 		} catch (RuntimeException e){
