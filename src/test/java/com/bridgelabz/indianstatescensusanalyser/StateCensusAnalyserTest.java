@@ -18,4 +18,14 @@ public class StateCensusAnalyserTest {
 		int count = analyser.loadIndianStateCensusData(CORRECT_CSV_FILE);
 		assertEquals(29, count);
 	}
+	
+	@Test
+	public void givenCSVFile_ReturnException_ifFileNotPresent() {
+		try {
+			StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
+			censusAnalyser.loadIndianStateCensusData(FILE_NOT_EXIST);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.CENSUS_FILE_PROBLEM, e.exceptionType);
+		}
+	}
 }
