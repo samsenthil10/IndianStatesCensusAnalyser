@@ -18,7 +18,7 @@ public class StateCensusAnalyserTest {
 		int count = analyser.loadIndianStateCensusData(CORRECT_CSV_FILE);
 		assertEquals(29, count);
 	}
-	
+
 	@Test
 	public void givenCSVFile_ReturnException_ifFileNotPresent() {
 		try {
@@ -28,7 +28,7 @@ public class StateCensusAnalyserTest {
 			assertEquals(StateCensusAnalyserException.CensusException.CENSUS_FILE_PROBLEM, e.exceptionType);
 		}
 	}
-	
+
 	@Test
 	public void givenNonCSVFile_ThrowIncorrectTypeIssueException() {
 		try {
@@ -38,7 +38,7 @@ public class StateCensusAnalyserTest {
 			assertEquals(StateCensusAnalyserException.CensusException.INCORRECT_TYPE_ISSUE, e.exceptionType);
 		}
 	}
-	
+
 	@Test
 	public void givenCorrectCSVFile_WhenDelimiterInvalid_ThrowDelimiterIssueException() {
 		try {
@@ -46,6 +46,16 @@ public class StateCensusAnalyserTest {
 			stateCensusAnalyserMain.loadIndianStateCensusData(CSV_FILE_WITH_WRONG_DELIMITER);
 		} catch (StateCensusAnalyserException e) {
 			assertEquals(StateCensusAnalyserException.CensusException.DELIMITER_ISSUE, e.exceptionType);
+		}
+	}
+
+	@Test
+	public void givenCorrectCSVFile_WhenHeaderAbsent_ThrowIncorrectHeaderException() {
+		try {
+			StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+			stateCensusAnalyserMain.loadIndianStateCensusData(CSV_FILE_WITHOUT_HEADER);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.INCORRECT_HEADER_PROBLEM, e.exceptionType);
 		}
 	}
 }
