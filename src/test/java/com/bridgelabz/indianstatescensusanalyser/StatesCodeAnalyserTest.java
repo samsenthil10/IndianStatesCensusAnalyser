@@ -31,4 +31,22 @@ public class StatesCodeAnalyserTest {
 		} catch (StateCensusAnalyserException e) {
 			assertEquals(StateCensusAnalyserException.CensusException.CENSUS_FILE_PROBLEM, e.exceptionType);
 		}
+	}
+
+	@Test
+	public void givenNonCSVFile_ThrowIncorrectTypeIssueException() {
+		try {
+			analyser.loadIndianStateCodeData(NOT_A_CSV_FILE);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.INCORRECT_TYPE_ISSUE, e.exceptionType);
+		}
+	}
+	@Test
+	public void givenCorrectCSVFile_WhenDelimiterInvalid_ThrowDelimiterIssueException() {
+		try {
+			analyser.loadIndianStateCodeData(CSV_FILE_WITH_WRONG_DELIMITER);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.DELIMITER_ISSUE, e.exceptionType);
+		}
+	}
 }
