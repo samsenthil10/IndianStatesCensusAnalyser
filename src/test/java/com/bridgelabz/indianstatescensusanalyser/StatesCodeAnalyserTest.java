@@ -23,4 +23,12 @@ public class StatesCodeAnalyserTest {
 		int count = analyser.loadIndianStateCodeData(CORRECT_CSV_FILE);
 		assertEquals(37, count);
 	}
+
+	@Test
+	public void givenCSVFile_ReturnException_ifFileNotPresent() {
+		try {
+			analyser.loadIndianStateCodeData(FILE_NOT_EXIST);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.CENSUS_FILE_PROBLEM, e.exceptionType);
+		}
 }
