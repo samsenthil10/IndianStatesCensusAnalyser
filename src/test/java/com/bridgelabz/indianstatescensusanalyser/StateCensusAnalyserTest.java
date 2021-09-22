@@ -28,4 +28,14 @@ public class StateCensusAnalyserTest {
 			assertEquals(StateCensusAnalyserException.CensusException.CENSUS_FILE_PROBLEM, e.exceptionType);
 		}
 	}
+	
+	@Test
+	public void givenNonCSVFile_ThrowIncorrectTypeIssueException() {
+		try {
+			StateCensusAnalyser stateCensusAnalyserMain = new StateCensusAnalyser();
+			stateCensusAnalyserMain.loadIndianStateCensusData(NOT_A_CSV_FILE);
+		} catch (StateCensusAnalyserException e) {
+			assertEquals(StateCensusAnalyserException.CensusException.INCORRECT_TYPE_ISSUE, e.exceptionType);
+		}
+	}
 }
